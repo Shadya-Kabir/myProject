@@ -86,7 +86,7 @@ sendEmail(){
 		  //save the returned token and redirect to the next page.
           if(res.status === 200){
             localStorage.authToken = res.data.token;
-            location.href ="/private";
+            location.href ="/privateCustomer";
           }
 
       })

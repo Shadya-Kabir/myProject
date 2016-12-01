@@ -14,7 +14,6 @@ const authorize     = require('./middleware/authorize');
 
 //application
 const app = express();
-const PORT = 2000;
 app.use(bodyParser.json());
 
 //defines which origins and headers are permitted
@@ -24,6 +23,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use(express.static('build'));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -51,7 +51,7 @@ app.get('/email',(req,res) =>{
         service: 'Gmail',
         auth: {
             user: 'shadya36@gmail.com', // Your email id
-            pass: 'eyeL0veMe' // Your password
+            pass: '' // Your password
         }
     });
 
@@ -448,8 +448,16 @@ app.get('/VendorPrivate2/:userId', (req,res) => {
     })
     //res.json(req.decoded.username);
 });
-app.listen(PORT, () => {
-    console.log('Server started on http://localhost:',PORT);
-    console.log('Press CTRL C to stop server');
-})
+// use the port value from the node environment, or 8080 if it can't be found'
+const PORT = process.env.PORT || 8080;
+// Change this from 8080 to 80
+app.listen(PORT, function(){
+	console.log("Listening on Port:%s",PORT)
+	console.log("Stop with Ctrl+C");
+});
+app.get('*', (req, res)=>{
+   res.sendFile((__dirname+'/build/index.html'));
+});
+
+
 
