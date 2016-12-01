@@ -66,13 +66,13 @@ componentDidMount(){
         //Add token to request header
         
         axios
-        .get('http://localhost:2000/VendorPrivate',{headers:{'authorization':localStorage.authToken}})
+        .get('/VendorPrivate',{headers:{'authorization':localStorage.authToken}})
         .then( (response) => {
             console.log("from customerPrivatePage, res.data is:", response.data);;
             if(response.status === 200){
 
                axios
-                  .get('http://localhost:2000/VendorPrivate2/'+response.data)
+                  .get('/VendorPrivate2/'+response.data)
                   .then( (res) => {
                       console.log("from customerPrivatePage, res.data is:", res.data);
                           self.setState({
@@ -98,17 +98,17 @@ componentDidMount(){
         })
          .catch((err)=>{
              //send user back to login page if token is invalid
-             location.href = 'http://localhost:3000/Home';
+             location.href = '/Home';
          })
          
       }
       else{
-         location.href = 'http://localhost:3000/Home';
+         location.href = '/Home';
      }
   }
 //everytime a new customer is added, this function update the customerArray.
   addNewCustomer(){
-              axios.get('http://localhost:2000/customers/'+this.state.id)
+              axios.get('/customers/'+this.state.id)
             
               .then((response)=> {
                 console.log(response);
@@ -129,7 +129,7 @@ componentDidMount(){
                     registered:this.state.customerRegistered};
                     console.log("signing in page register submit",logInInfo);
     axios
-      .post('http://localhost:2000/addUser',logInInfo)
+      .post('/addUser',logInInfo)
       .then( (res) =>{
         console.log("add user: ",res.data);
 
@@ -137,7 +137,7 @@ componentDidMount(){
                          vendor_id:this.state.id}; 
                          console.log("membership customer id and vendor id: ",membership); 
         axios
-          .post('http://localhost:2000/createMember',membership)
+          .post('/createMember',membership)
           .then((response)=>{
             console.log("member added: ",response);
             this.addNewCustomer();

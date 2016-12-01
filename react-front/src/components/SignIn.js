@@ -63,7 +63,7 @@ class SignIn extends Component {
 
 sendEmail(){
   axios
-    .get('http://localhost:2000/email')
+    .get('/email')
     .then((res) => {
         console.log(res);
     })
@@ -78,7 +78,7 @@ sendEmail(){
     let logInInfo = {user_id:this.state.user_id, password:this.state.password, warning:this.state.warning};
     console.log("log in from sign in page",this.state.user_id, this.state.password);
     axios
-      .post('http://localhost:2000/SignIn',logInInfo)
+      .post('/SignIn',logInInfo)
       .then((res) => {
         console.log(res);
        
@@ -86,7 +86,7 @@ sendEmail(){
 		  //save the returned token and redirect to the next page.
           if(res.status === 200){
             localStorage.authToken = res.data.token;
-            location.href ="http://localhost:3000/private";
+            location.href ="/private";
           }
 
       })
@@ -123,13 +123,13 @@ registerSubmit(e){
                     passWord:this.state.passWord};
                     console.log("signing in page register submit",logInInfo);
 axios
-      .get('http://localhost:2000/customerFullname/'+this.state.fullName)
+      .get('/customerFullname/'+this.state.fullName)
       .then( (res) =>{
         if(res.status===203){
           console.log("Customer is null: ");
           this.setState({warningRegisteredUser:false});
            axios
-          .post('http://localhost:2000/encrypt',logInInfo)
+          .post('/encrypt',logInInfo)
           .then( (res) =>{
             console.log("registered user detail: ",res);
             })
@@ -196,7 +196,7 @@ updateFormSubmit(e){
                     console.log("sign in page update form submit",logInInfo);
 
            axios
-          .post('http://localhost:2000/encryptUpdate',logInInfo)
+          .post('/encryptUpdate',logInInfo)
           .then( (res) =>{
             console.log("registered user detail: ",res);
             })

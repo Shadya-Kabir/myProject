@@ -46,7 +46,7 @@ class VendorSignIn extends Component {
     let logInInfo = {user_id:this.state.user_id, password:this.state.password, warning:this.state.warning};
     console.log("log in from vendorSignIn in page",this.state.user_id, this.state.password);
     axios
-      .post('http://localhost:2000/VendorSignIn',logInInfo)
+      .post('/VendorSignIn',logInInfo)
       .then((res) => {
         console.log("from vendorSignIn formSubmit: ",res);
        
@@ -54,7 +54,7 @@ class VendorSignIn extends Component {
 		  //save the returned token and redirect to the next page.
           if(res.status === 200){
             localStorage.authToken = res.data.token;
-            location.href ="http://localhost:3000/Vendor";
+            location.href ="/Vendor";
           }
 
       })
@@ -93,7 +93,7 @@ registerSubmit(e){
                     console.log("VendorSignIn page register submit",logInInfo);
     axios
     
-      .post('http://localhost:2000/vendorEncrypt',logInInfo)
+      .post('/vendorEncrypt',logInInfo)
       .then( (res) =>{
         console.log(res);
       })
