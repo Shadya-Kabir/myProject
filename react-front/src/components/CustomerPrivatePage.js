@@ -75,15 +75,24 @@ class CustomerPrivatePage extends Component{
     else {
       return (
         <div>
-          <h1>Hello {this.state.data}</h1>
-          <h4> {this.state.fullName}</h4>
-          <h4>{this.state.dateOfBirth}</h4>
-          <h4>{this.state.email}</h4>
-          <h4>{this.state.address}</h4>
-          <h4>{this.state.ph}</h4>
-          <h4>{this.state.registered}</h4>
-          <h4>{this.state.visitHistory}</h4>
+<div className="ownerinfo col-xs-12 col-sm-6 col-md-6 col-lg-6">
+         
+         <span className="descriptionbadge">
+         <img src='http://previews.123rf.com/images/njocky/njocky1112/njocky111200054/11688399-Herbal-and-fluoride-protection-icon-of-a-tooth-Stock-Photo-logo-dental-dentist.jpg' height='400' width='400' />
+         </span>
+         </div>
+         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6" style={{left:'-22px'}}>
+          <h2 style={{textAlign:"left"}}>Hello {this.state.data}</h2>
+          <h4 style={{textAlign:"left"}}>{this.state.fullName}</h4>
+          <h4 style={{textAlign:"left"}}>Date of Birth: {this.state.dateOfBirth}</h4>
+          <h4 style={{textAlign:"left"}}>Email: {this.state.email}</h4>
+          <h4 style={{textAlign:"left"}}>Ph: {this.state.ph}</h4>
+          <h4 style={{textAlign:"left"}}>Address: {this.state.address}</h4>
+          <h4 style={{textAlign:"left"}}>Role: {this.state.visitHistory}</h4>
+          <h4 style={{textAlign:"left"}}>Registered: {this.state.registered}</h4>
+          </div>
         </div>
+       
         );
     }
   }

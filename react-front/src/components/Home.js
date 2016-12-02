@@ -7,7 +7,8 @@ class Home extends Component {
         
         return (
         <div>
-           <h3>This is Home Page.</h3>
+        <img src=".images/wave1.jpeg" className="logoTop"/>
+           <h3>lalalaThis is Home Page.</h3>
             </div>
         )
     }

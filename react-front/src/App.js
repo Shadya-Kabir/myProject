@@ -12,7 +12,7 @@ class App extends Component {
                 <li><Link to={"Home"}>Home</Link></li>
                 <li><Link to={"About"}>About</Link></li>
                 <li><Link to={"SignIn"}>Sign In</Link></li>
-                <li><Link to={"VendorSignIn"}>Vendor Sign In</Link></li>
+                <li><Link to={"VendorSignIn"}>Client Sign In</Link></li>
                 <li><Link to={"Vendor"}>Vendor Page</Link></li>  
               </ul>
               </div>
