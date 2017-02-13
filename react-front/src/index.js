@@ -21,7 +21,7 @@ ReactDOM.render(
             <Route path="SignIn" component={SignIn}/>   
              <Route path="VendorSignIn" component={VendorSignIn}/>   
             <Route path="Vendor" component={VendorPrivatePage}/>
-            <Route path="privateCustomer" component={CustomerPrivatePage}/>
+            <Route path="private" component={CustomerPrivatePage}/>
             
             
         </Route>

@@ -47,20 +47,21 @@ const bookshelf = require('bookshelf')(knex);
 
 //send email
 app.get('/email',(req,res) =>{
+    console.log("im in server /email");
     var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'shadya36@gmail.com', // Your email id
-            pass: '' // Your password
+            user: 'customerthree333@gmail.com', // Your email id
+            pass: 'brainStation123' // Your password
         }
     });
 
     var mailOptions = {
-    from: '<shadya36@gmail.com>', // sender address
-    to: 'shadya36@gmail.com', // list of receivers
+    from: '<customerthree333@gmail.com>', // sender address
+    to: 'customerthree333@gmail.com', // list of receivers
     subject: 'Email Example', // Subject line
-    text: 'Hello World plain text',
-    html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+    text: 'Invite successful',
+    html: '<b>Invite successful ✔</b>' // You can choose to send an HTML body instead
 };
 
         // send mail with defined transport object

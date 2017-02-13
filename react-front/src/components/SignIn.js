@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import {Modal,Button, Popover, Tooltip, OverlayTrigger, Grid, Row, Col} from 'react-bootstrap';
 import Form, { Input, Fieldset } from 'react-bootstrap-form';
+import './SignIn.css';
 //var Modal = require('react-modal-bootstrap');
 //var Alert = require('react-bootstrap').Alert;
 //var DatePicker = require("react-bootstrap-date-picker");
@@ -63,7 +64,7 @@ class SignIn extends Component {
 
 sendEmail(){
   axios
-    .get('/email')
+    .get('http://localhost:2000/email')
     .then((res) => {
         console.log(res);
     })
@@ -78,7 +79,7 @@ sendEmail(){
     let logInInfo = {user_id:this.state.user_id, password:this.state.password, warning:this.state.warning};
     console.log("log in from sign in page",this.state.user_id, this.state.password);
     axios
-      .post('/SignIn',logInInfo)
+      .post('http://localhost:2000/SignIn',logInInfo)
       .then((res) => {
         console.log(res);
        
@@ -86,7 +87,7 @@ sendEmail(){
 		  //save the returned token and redirect to the next page.
           if(res.status === 200){
             localStorage.authToken = res.data.token;
-            location.href ="/privateCustomer";
+            location.href ="http://localhost:3000/private";
           }
 
       })
@@ -123,13 +124,13 @@ registerSubmit(e){
                     passWord:this.state.passWord};
                     console.log("signing in page register submit",logInInfo);
 axios
-      .get('/customerFullname/'+this.state.fullName)
+      .get('http://localhost:2000/customerFullname/'+this.state.fullName)
       .then( (res) =>{
         if(res.status===203){
           console.log("Customer is null: ");
           this.setState({warningRegisteredUser:false});
            axios
-          .post('/encrypt',logInInfo)
+          .post('http://localhost:2000/encrypt',logInInfo)
           .then( (res) =>{
             console.log("registered user detail: ",res);
             })
@@ -196,7 +197,7 @@ updateFormSubmit(e){
                     console.log("sign in page update form submit",logInInfo);
 
            axios
-          .post('/encryptUpdate',logInInfo)
+          .post('http://localhost:2000/encryptUpdate',logInInfo)
           .then( (res) =>{
             console.log("registered user detail: ",res);
             })
@@ -257,30 +258,18 @@ updateFormSubmit(e){
     );
 
     return (
-      <div>
-        <h4>Customer Sign In Page.</h4>
-
-        <Button
-          bsStyle="primary"
-          bsSize="large"
-          onClick={this.open}
-        >
-          Sign in
-        </Button>
-
+      <div className="logo">
+        <section >
+        <p style={{textAlign:'center'}}>
+					<Button onClick={this.open} className="btn btn-4 btn-4a icon-arrow-right">CUSTOMER SIGN IN</Button>		
+				</p>
+			</section>
+      {/* <modal for sign in /> */}
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>Log in</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-           
-            <h4>Popover in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={popover}><a href="#">popover</a></OverlayTrigger> here</p>
-
-            <h4>Tooltips in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={tooltip}><a href="#">tooltip</a></OverlayTrigger> here</p>
-
-            <hr />
             <div>
     			<h1 className="text-center">Log in</h1>
     			
@@ -291,16 +280,12 @@ updateFormSubmit(e){
               <Form>
                 <label for="usr">Password:</label>
                 <input onChange={this.txtFieldChange} type="password" className="form-control" name="password" placeholder="Password" id="pwd" />
-              </Form>
-              <div className="input-group">
-            			<span className="input-group-btn">
-               			<button onClick={this.formSubmit} className="btn btn-primary" type="button">Sign in</button>
-            			</span>	
-                  </div>   
+              </Form>          		
+                     <Button style={{marginLeft:0}}onClick={this.formSubmit}>Sign in</Button>
               <div className="checkbox">
                 <label><input type="checkbox" />Remember me </label>
               </div>
-              <h5>Not registered yet? <a onClick={this.openRegister}>Sign in.</a></h5>			
+              <h5>Not registered yet? <a onClick={this.openRegister}>Sign up.</a></h5>			
 			    </div>
           </Modal.Body>
           <Modal.Footer>
@@ -308,8 +293,8 @@ updateFormSubmit(e){
           </Modal.Footer>
         </Modal>
        
-        
-        <Modal bsSize="large" show={this.state.showRegister} onHide={this.closeRegister}>
+        {/* <modal for registration /> */}
+        <Modal show={this.state.showRegister} onHide={this.closeRegister}>
         
           <Modal.Header closeButton>
             <Modal.Title>Register</Modal.Title>
@@ -350,15 +335,10 @@ updateFormSubmit(e){
                 <label for="usr">Password:</label>
                 <input onChange={this.registerFieldChange} type="password" className="form-control" name="passWord" id="pwd" />
               </Form>
-              <div className="input-group">
-            			<span className="input-group-btn">
-               			<button onClick={this.registerSubmit} className="btn btn-primary" type="button">Sign in</button>
-            			</span>	
-                  </div>   
+                     <Button onClick={this.registerSubmit} style={{marginLeft:0}}>Sign up</Button>
               <div className="checkbox">
                 <label><input type="checkbox" />Remember me </label>
-              </div>
-              <h5>Not registered yet? <a onClick={this.closeRegister}>Register</a></h5>			
+              </div>		
 			    
           </Modal.Body>
               <Modal.Footer>
@@ -366,7 +346,7 @@ updateFormSubmit(e){
               </Modal.Footer>
           
           </Modal>
-
+          {/* <modal for registration /> */}
           <Modal show={this.state.showUpdate} onHide={this.closeUpdate}>
           <Modal.Header closeButton>
             <Modal.Title>Log in</Modal.Title>
@@ -387,11 +367,7 @@ updateFormSubmit(e){
                 <label for="usr">Password:</label>
                 <input onChange={this.updateFieldChange} type="password" className="form-control" name="updatePassword" placeholder="Password" id="pwd" />
               </Form>
-              <div className="input-group">
-            			<span className="input-group-btn">
-               			<button onClick={this.updateFormSubmit} className="btn btn-primary" type="button">Register</button>
-            			</span>	
-                  </div>   
+               			<Button style={{marginLeft:0}} onClick={this.updateFormSubmit}>Register</Button>
               <div className="checkbox">
                 <label><input type="checkbox" />Remember me </label>
               </div>
@@ -399,7 +375,7 @@ updateFormSubmit(e){
 			    </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.closeUpdate}>Close</Button>
+            <Button onClick={this.closeRegister}>Close</Button>
           </Modal.Footer>
         </Modal>
        

@@ -1,0 +1,9 @@
+.logo{
+    color:'black';
+    text-shadow: 1px 1px 1px white;
+    font-size:150%;
+    /*because the div wraps around the content of whats inside, if you inspect it 
+    the text is as wide as the div, so no need to text-align unless u set a div width*/
+    text-align:center;
+    
+    }

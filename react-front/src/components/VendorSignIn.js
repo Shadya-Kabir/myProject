@@ -46,7 +46,7 @@ class VendorSignIn extends Component {
     let logInInfo = {user_id:this.state.user_id, password:this.state.password, warning:this.state.warning};
     console.log("log in from vendorSignIn in page",this.state.user_id, this.state.password);
     axios
-      .post('/VendorSignIn',logInInfo)
+      .post('http://localhost:2000/VendorSignIn',logInInfo)
       .then((res) => {
         console.log("from vendorSignIn formSubmit: ",res);
        
@@ -54,7 +54,7 @@ class VendorSignIn extends Component {
 		  //save the returned token and redirect to the next page.
           if(res.status === 200){
             localStorage.authToken = res.data.token;
-            location.href ="/Vendor";
+            location.href ="http://localhost:3000/Vendor";
           }
 
       })
@@ -93,7 +93,7 @@ registerSubmit(e){
                     console.log("VendorSignIn page register submit",logInInfo);
     axios
     
-      .post('/vendorEncrypt',logInInfo)
+      .post('http://localhost:2000/vendorEncrypt',logInInfo)
       .then( (res) =>{
         console.log(res);
       })
@@ -168,30 +168,19 @@ registerSubmit(e){
     );
 
     return (
-      <div>
-        <h4>Client Sign In Page.</h4>
-
-        <Button
-          bsStyle="primary"
-          bsSize="large"
-          onClick={this.open}
-        >
-          Sign in
-        </Button>
-
+     <div className='logo'>
+        <section>
+				<p style={{textAlign:'center'}}>
+					<Button onClick={this.open} className="btn btn-4 btn-4a icon-arrow-right">Client SIGN IN</Button>		
+				</p>
+			</section>
+  {/* <modal for sign in /> */}
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>Log in</Modal.Title>
           </Modal.Header>
           <Modal.Body>
            
-            <h4>Popover in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={popover}><a href="#">popover</a></OverlayTrigger> here</p>
-
-            <h4>Tooltips in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={tooltip}><a href="#">tooltip</a></OverlayTrigger> here</p>
-
-            <hr />
             <div>
     			<h1 className="text-center">Log in</h1>
     			
@@ -203,11 +192,8 @@ registerSubmit(e){
                 <label for="usr">Password:</label>
                 <input onChange={this.txtFieldChange} type="password" className="form-control" name="password" placeholder="Password" id="pwd" />
               </Form>
-              <div className="input-group">
-            			<span className="input-group-btn">
-               			<button onClick={this.formSubmit} className="btn btn-primary" type="button">Sign in</button>
-            			</span>	
-                  </div>   
+                    <Button style={{marginLeft:0}} onClick={this.formSubmit}>Sign in</Button>
+               		
               <div className="checkbox">
                 <label><input type="checkbox" />Remember me </label>
               </div>
@@ -219,8 +205,8 @@ registerSubmit(e){
           </Modal.Footer>
         </Modal>
        
-        
-        <Modal bsSize="large" show={this.state.showRegister} onHide={this.closeRegister}>
+        {/* <modal for registration /> */}
+        <Modal show={this.state.showRegister} onHide={this.closeRegister}>
         <Grid>
          <Row className="show-grid">
          
@@ -264,23 +250,18 @@ registerSubmit(e){
                 <label for="usr">Password:</label>
                 <input onChange={this.registerFieldChange} type="password" className="form-control" name="passWord" id="pwd" />
               </Form>
-              <div className="input-group">
-            			<span className="input-group-btn">
-               			<button onClick={this.registerSubmit} className="btn btn-primary" type="button">Sign in</button>
-            			</span>	
-                  </div>   
+               			<Button style={{marginLeft:0}} onClick={this.registerSubmit}>Sign in</Button>   
               <div className="checkbox">
                 <label><input type="checkbox" />Remember me </label>
               </div>
-              <h5>Not registered yet? <a onClick={this.closeRegister}>Sign in.</a></h5>			
+              		
 			    </div>
           </Modal.Body>
               <Modal.Footer>
                 <Button onClick={this.closeRegister}>Close</Button>
               </Modal.Footer>
             </Col>
-              <Col md={2} mdPush={0}>Why Register?</Col>
-            </Row>
+              </Row>
           </Grid>
           </Modal>
         

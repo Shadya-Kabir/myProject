@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Modal,Button, ButtonToolbar, Popover, Tooltip, OverlayTrigger, Grid, Row, Col} from 'react-bootstrap';
 import Form, { Input, Fieldset } from 'react-bootstrap-form';
+import './VendorPrivatePage.css';
 
 //const EventCalendar = require('react-event-calendar');
 //import {Router, Route, IndexRoute, browserHistory, Link} from 'react-router';
@@ -83,13 +84,13 @@ componentDidMount(){
         //Add token to request header
         
         axios
-        .get('/VendorPrivate',{headers:{'authorization':localStorage.authToken}})
+        .get('http://localhost:2000/VendorPrivate',{headers:{'authorization':localStorage.authToken}})
         .then( (response) => {
             console.log("from customerPrivatePage, res.data is:", response.data);;
             if(response.status === 200){
 
                axios
-                  .get('/VendorPrivate2/'+response.data)
+                  .get('http://localhost:2000/VendorPrivate2/'+response.data)
                   .then( (res) => {
                       console.log("from customerPrivatePage, res.data is:", res.data);
                           self.setState({
@@ -126,14 +127,14 @@ componentDidMount(){
 
   sendEmail(){
   axios
-    .get('/email')
+    .get('http://localhost:2000/email')
     .then((res) => {
         console.log(res);
     })
 }
 //everytime a new customer is added, this function update the customerArray.
   addNewCustomer(){
-              axios.get('/customers/'+this.state.id)
+              axios.get('http://localhost:2000/customers/'+this.state.id)
             
               .then((response)=> {
                 console.log(response);
@@ -154,7 +155,7 @@ componentDidMount(){
                     registered:this.state.customerRegistered};
                     console.log("signing in page register submit",logInInfo);
     axios
-      .post('/addUser',logInInfo)
+      .post('http://localhost:2000/addUser',logInInfo)
       .then( (res) =>{
         console.log("add user: ",res.data);
 
@@ -162,7 +163,7 @@ componentDidMount(){
                          vendor_id:this.state.id}; 
                          console.log("membership customer id and vendor id: ",membership); 
         axios
-          .post('/createMember',membership)
+          .post('http://localhost:2000/createMember',membership)
           .then((response)=>{
             console.log("member added: ",response);
             this.addNewCustomer();
@@ -176,7 +177,7 @@ searchSubmit(e){
                     
                     console.log("signing in page search submit",fullName);
     axios
-      .get('/customerFullname/'+fullName)
+      .get('http://localhost:2000/customerFullname/'+fullName)
       .then( (res) =>{
         console.log("add user: ",res.data);
 
@@ -205,7 +206,7 @@ searchSubmit(e){
                          vendor_id:this.state.id}; 
                          console.log("membership customer id and vendor id: ",membership); 
         axios
-          .post('/createMember',membership)
+          .post('http://localhost:2000/createMember',membership)
           .then((response)=>{
             console.log("member added: ",response);
             this.addNewCustomer();
@@ -293,11 +294,11 @@ closeRegister() {
         <div className='row'>
          <div style={{postition:'relative'}} className="ownerinfo col-xs-12 col-sm-6 col-md-6 col-lg-6">
          
-         <span className="descriptionbadge">
-         <img src='https://s-media-cache-ak0.pinimg.com/originals/65/a2/1c/65a21cae38d275c9b63f1c37fef1f443.jpg' style={{height:'100%', width:'100%'}} />
+         <span className="descriptionbadge container">
+         <img src='https://s-media-cache-ak0.pinimg.com/originals/65/a2/1c/65a21cae38d275c9b63f1c37fef1f443.jpg' style={{height:'300 px', width:'80%', padding:'20px', border:'solid'}} />
          </span>
          </div>
-         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6" style={{left:'-22px'}}>
+         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6" style={{left:'-22px', padding:'20px'}}>
 
           <h2 style={{textAlign:"left"}}>{this.state.fullName}</h2>
           <h4 style={{textAlign:"left"}}> {this.state.data}</h4>
@@ -313,7 +314,7 @@ closeRegister() {
          
         <Button onClick={this.openRegister} bsStyle="primary">Add User</Button>
           <Form>
-            <input onChange={this.searchFieldChange} style={{width:'50%', marginTop:'10',marginBottom:'10'}}type="text" placeholder='Full name' className="form-control boxFormat titleInput" name="searchName" id="usr"/>
+            <input onChange={this.searchFieldChange} style={{width:'50%', marginTop:'10',marginBottom:'10', left:'-50'}}type="text" placeholder='Full name' className="form-control boxFormat titleInput" name="searchName" id="usr"/>
           </Form>
         <Button onClick={this.searchSubmit} bsStyle="warning">Search User</Button>
        
@@ -321,8 +322,8 @@ closeRegister() {
           
 {this.state.customerArray.length>0?
           <div className="container">
-          <h3>My Customer table</h3>     
-          <table className="table table-hover">
+          <h3 style={{textAlign:'center'}}>MY CUSTOMER TABLE</h3>     
+          <table className="table table-hover, overflow-x:auto">
             <thead>
               <tr>
                 <th>ID</th>

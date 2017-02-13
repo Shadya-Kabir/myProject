@@ -10,14 +10,3 @@ homePageNav{
     margin: 0;
 }
     
-  .logoTop{
-    height:75px;
-
-    /*needs to have : for syntax or else css can't read it*/
-    width:30%;
-    display:block;
-    position:absolute;
-    top:0;
-    left:0;
-    z-index: 2;
-}
