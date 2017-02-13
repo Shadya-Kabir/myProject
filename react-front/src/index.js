@@ -8,6 +8,7 @@ import SignIn from './components/SignIn';
 import VendorSignIn from './components/VendorSignIn';
 import CustomerPrivatePage from './components/CustomerPrivatePage';
 //import SignInVendor from './components/SignInVendor';
+import {hashHistory, Link} from 'react-router';
 import VendorPrivatePage from './components/VendorPrivatePage';
 import './index.css';
 
