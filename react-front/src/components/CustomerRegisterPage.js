@@ -32,13 +32,13 @@ class CustomerPrivatePage extends Component{
         //Add token to request header
         
         axios
-        .get('http://localhost:2000/customerFullname/:id')
+        .get('/customerFullname/:id')
         .then( (response) => {
             console.log("from customerPrivatePage, res.data is:", response.data);;
             if(response.status === 200){
 
                axios
-                  .get('http://localhost:2000/private2/'+response.data)
+                  .get('/private2/'+response.data)
                   .then( (res) => {
                       console.log("from customerPrivatePage, res.data is:", res.data);
                           self.setState({
@@ -61,11 +61,11 @@ class CustomerPrivatePage extends Component{
         })
          .catch((err)=>{
              //send user back to login page if token is invalid
-             location.href = 'http://localhost:3000/Home';
+             location.href = '/Home';
          })
       }
       else{
-         location.href = 'http://localhost:3000/Home';
+         location.href = '/Home';
      }
   }
   render(){

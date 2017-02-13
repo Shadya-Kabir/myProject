@@ -13,7 +13,7 @@ import './index.css';
 
 
 ReactDOM.render(
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
         <Route path="/" component={App}>
             //<IndexRoute component={Home} />
             <Route path="Home" component={Home}/>   
