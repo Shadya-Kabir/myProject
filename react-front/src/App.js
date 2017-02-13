@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Router, Route, IndexRoute, browserHistory, Link} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory, hashHistory, Link} from 'react-router';
 import './App.css';
 
 class App extends Component {
